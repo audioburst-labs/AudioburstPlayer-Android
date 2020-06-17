@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AB Player Demo</string>
+    <string name="main_welcome_to">Welcome to</string>
+    <string name="main_player">player</string>
+    <string name="main_application_key">Application key</string>
+    <string name="main_settings_id">Experience ID</string>
+    <string name="main_optional">(optional)</string>
+    <string name="main_reload_player">Reload player</string>
+    <string name="main_no_key_error">Application key needs to be provided</string>
+</resources>
