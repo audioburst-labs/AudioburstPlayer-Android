@@ -35,6 +35,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer
     }
 
     override fun onError(error: AudioburstPlayer.Error) {
-        Log.i("MainActivity", error.name)
+        Log.i("MainActivity", error.name())
     }
 }
