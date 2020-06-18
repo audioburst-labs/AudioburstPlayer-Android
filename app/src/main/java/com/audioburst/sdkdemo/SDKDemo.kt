@@ -13,8 +13,8 @@ class SDKDemo : Application(), AudioburstApplication {
         AudioburstPlayer.init(
             context = this,
             sdkKeys = SdkKeys(
-                applicationKey = "YOUR_APP_KEY",
-                experienceId = "YOUR_EXPERIENCE_ID"
+                applicationKey = BuildConfig.APPLICATION_KEY,
+                experienceId = BuildConfig.EXPERICE_ID
             )
         )
     }
