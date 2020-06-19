@@ -1,7 +1,7 @@
 # AudioburstPlayer Android SDK
 
 ## Introduction
-AudioburstPlayer is a SDK for Android that will let you play your previously prepared playlist of Bursts. This repo is the sample which demonstrate how to use AudioburstPlayer in your app.
+AudioburstPlayer is the SDK for Android that will let you play your previously prepared playlist of Bursts. This repo is the sample which demonstrate how to use AudioburstPlayer in your Android app.
 
 ## Features
 AudioburstPlayer consists of two modes of audio player - compact and fullscreen which allows you to:
@@ -13,7 +13,12 @@ AudioburstPlayer consists of two modes of audio player - compact and fullscreen 
 - preview the title, the show name,
 - play the playlist continuously in a background,
 - control the playlist from the locked screen,
-- plug the headphones or cast the audio to other devices via bluetooth.
+- plug the headphones or cast the audio to other devices via bluetooth,
+- see bursts list,
+- support dark/light theme.
+
+## Requirements
+- Android 5.1+
 
 ## Get Started
 
@@ -28,7 +33,7 @@ Also you need to provide **experience id**.
 ## Add AudioburstPlayer to your app
 
 ### Step 1. Add AudioburstPlayer dependency
-Add AudioburstPlayer Android SDK to your project. To do this, add the following dependency in your app level `build.gradle` file-
+Add AudioburstPlayer Android SDK to your project. To do this, add the following dependency in your app level `build.gradle` file:
 ```gradle
 implementation 'com.audioburst:audioburst_player:{latest-version}'
 ```
@@ -71,7 +76,7 @@ AudioburstPlayer.startPlaying(
 ```
 
 ### Step 4. Handle errors
-There can some errors happen when, for example, communicating with the API, so to be able to handle those errors on app side we are providing a way to listen to those events:
+There can some errors happen when, for example, communicating with the API. To be able to handle those errors on app side we are providing a way to listen to those events:
 Make your class implement `AudioburstPlayer.ErrorListener`, for example:
 ```kotlin
 class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer.ErrorListener {
@@ -89,6 +94,22 @@ Also remember to unregister ErrorListener to aviod memory leaks:
 AudioburstPlayer.removeErrorListener(this)
 ```
 
+## Dependencies
+- Kotlin
+- AppCompat
+- Ktx
+- Coroutines
+- ConstraintLayout
+- Dagger
+- SwipeLayout
+- Lottie
+- Retrofit
+- ThreeTenBp
+- ExoPlayer
+- SqlDelight
+- Groupie
+- Glide
+- AndroidSVG
 
 License
 -------
