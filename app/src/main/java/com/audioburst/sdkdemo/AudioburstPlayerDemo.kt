@@ -3,10 +3,8 @@ package com.audioburst.sdkdemo
 import android.app.Application
 import com.audioburst.audioburst_player.AudioburstPlayer
 import com.audioburst.audioburst_player.SdkKeys
-import com.audioburst.base.AudioburstApplication
-import com.audioburst.base.Dependencies
 
-class SDKDemo : Application(), AudioburstApplication {
+class AudioburstPlayerDemo : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -18,7 +16,4 @@ class SDKDemo : Application(), AudioburstApplication {
             )
         )
     }
-
-    override val dependencies: Dependencies
-        get() = AudioburstPlayer.dependencies()
 }

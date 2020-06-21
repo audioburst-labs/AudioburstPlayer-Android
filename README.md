@@ -53,12 +53,6 @@ override fun onCreate() {
 } 
 ```
 
-Also you need to implement `AudioburstApplication` in your `Application` class and pass dependencies like that:
-```kotlin
-override val dependencies: Dependencies
-    get() = AudioburstPlayer.dependencies()
-```
-
 ### Step 3. Start playing Audioburst content:
 You simply need to call one method to start playing Audioburst content:
 ```kotlin
@@ -67,7 +61,7 @@ AudioburstPlayer.startPlaying()
 
 in case you would like to change keys you used to initialize a SDK, you can also call:
 ```kotlin
-AudioburstPlayer.startPlaying(
+AudioburstPlayer.setKeys(
     sdkKeys = SdkKeys(
         applicationKey = "YOUR_APP_KEY",
         experienceId = "YOUR_EXPERIENCE_ID"
@@ -106,10 +100,8 @@ AudioburstPlayer.removeErrorListener(this)
 - Retrofit
 - ThreeTenBp
 - ExoPlayer
-- SqlDelight
 - Groupie
 - Glide
-- AndroidSVG
 
 License
 -------
