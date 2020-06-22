@@ -1,44 +1,53 @@
 # AudioburstPlayer Android SDK
 
 ## Introduction
-AudioburstPlayer is the SDK for Android that will let you play your previously prepared playlist of Bursts. This repo is the sample which demonstrate how to use AudioburstPlayer in your Android app.
+AudioburstPlayer is the SDK for Android that plays a pre-arranged playlist of audio items - or ‘bursts’ - short snippets of spoken-word audio sourced from live radio and premium podcasts.
 
 ## Features
-AudioburstPlayer consists of two modes of audio player - compact and fullscreen which allows you to:
-- download a custom playlist,
-- play any burst from the playlist,
-- skip to the next or previous burst,
-- switch to original listening,
-- move backward and forward within a single burst,
-- preview the title, the show name,
-- play the playlist continuously in a background,
-- control the playlist from the locked screen,
-- plug the headphones or cast the audio to other devices via bluetooth,
-- see bursts list,
-- support dark/light theme.
+AudioburstPlayer offers two modes: compact and full screen. Both offer the following features:
+- Play any burst from the playlist
+- Skip to the next or previous burst
+- Keep listening (switch to a longer version of the burst)
+- Move playhead backward and forward within a single burst
+- Displays Burst title and Show name
+- Playlist plays continuously in background
+- Playlist can be controlled from locked screen
+- Play playlist via alternative audio output: headphones, bluetooth devices or AirPlay
+- View/scroll bursts in playlists
+- Includes support for Dark Mode
 
 ## Requirements
 - Android 5.1+
 
 ## Get Started
 
-This guide is a quick start to add AudioburstPlayer to an Android app. Android Studio is the recommended development environment for building an app with the AudioburstPlayer SDK.
+This guide is a quick walkthrough to add AudioburstPlayer to an Android app. We recommend Android Studio as the development environment for building an app with the AudioburstPlayer SDK. The AudioburstPlayer-Android application showcases all features of the AudioburstPlayer.
 
 ## Prerequisites
 
 ### Audioburst API key
-Your application needs an **application key** (check [Audioburst developers site](https://developers.audioburst.com/) to obtain the key).
-Also you need to provide **experience id**.
+The application requires an application key and experience ID, both of which can be obtained via [Audioburst Publishers](https://studio.audioburst.com/). The experience ID is a unique identifier for the customized playlist topics chosen during the setup process in Audioburst Publishers.
 
 ## Add AudioburstPlayer to your app
 
 ### Step 1. Add AudioburstPlayer dependency
+[ ![Download Android](https://api.bintray.com/packages/audioburst/maven/audioburst_player/images/download.svg) ](https://bintray.com/audioburst/maven/audioburst_player/_latestVersion)
+
 Add AudioburstPlayer Android SDK to your project. To do this, add the following dependency in your app level `build.gradle` file:
 ```gradle
 implementation 'com.audioburst:audioburst_player:{latest-version}'
 ```
 
-### Step 2. Init AudioburstPlayer
+### Step 2. Add `MiniPlayer` to your layout hierarchy
+```xml
+<fragment
+    android:id="@+id/miniPlayer"
+    android:name="com.audioburst.audioburst_player.MiniPlayer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+```
+
+### Step 3. Init AudioburstPlayer
 Initialize AudioburstPlayer in your `Application.onCreate` method:
 ```kotlin
 override fun onCreate() {
@@ -53,7 +62,7 @@ override fun onCreate() {
 } 
 ```
 
-### Step 3. Start playing Audioburst content:
+### Step 4. Start playing Audioburst content:
 You simply need to call one method to start playing Audioburst content:
 ```kotlin
 AudioburstPlayer.startPlaying()
@@ -69,9 +78,8 @@ AudioburstPlayer.setKeys(
 )
 ```
 
-### Step 4. Handle errors
-There can some errors happen when, for example, communicating with the API. To be able to handle those errors on app side we are providing a way to listen to those events:
-Make your class implement `AudioburstPlayer.ErrorListener`, for example:
+### Step 5. Handle errors
+In the event of an error when communicating with the API, we provide a way to monitor those events:
 ```kotlin
 class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer.ErrorListener {
     override fun onError(error: AudioburstPlayer.Error) {
@@ -83,7 +91,7 @@ And add listener:
 ```kotlin
 AudioburstPlayer.addErrorListener(this)
 ```
-Also remember to unregister ErrorListener to aviod memory leaks:
+Don’t forget to unregister `ErrorListener` to avoid memory leaks:
 ```kotlin
 AudioburstPlayer.removeErrorListener(this)
 ```
@@ -102,20 +110,3 @@ AudioburstPlayer.removeErrorListener(this)
 - ExoPlayer
 - Groupie
 - Glide
-
-License
--------
-
-    Copyright 2020 Audioburst
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
