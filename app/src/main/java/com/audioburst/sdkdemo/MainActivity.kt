@@ -15,13 +15,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer
         mainExperienceIdEditView.setText(AudioburstPlayer.experienceId)
 
         mainReloadButton.setOnClickListener {
-            AudioburstPlayer.setKeys(
-                SdkKeys(
+            AudioburstPlayer.init(
+                context = this,
+                sdkKeys = SdkKeys(
                     applicationKey = mainApplicationKeyEditText.text.toString(),
                     experienceId = mainExperienceIdEditView.text.toString()
                 )
             )
-            AudioburstPlayer.startPlaying()
         }
     }
 
