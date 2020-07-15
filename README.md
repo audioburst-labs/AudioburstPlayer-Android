@@ -4,7 +4,7 @@
 AudioburstPlayer is the SDK for Android that plays a pre-arranged playlist of audio items - or ‘bursts’ - short snippets of spoken-word audio sourced from live radio and premium podcasts.
 
 ## Features
-AudioburstPlayer offers two modes: compact and full screen. Both offer the following features:
+AudioburstPlayer offers two modes: compact (mini or floating) and full screen. Both offer the following features:
 - Play any burst from the playlist
 - Skip to the next or previous burst
 - Keep listening (switch to a longer version of the burst)
@@ -15,6 +15,10 @@ AudioburstPlayer offers two modes: compact and full screen. Both offer the follo
 - Play playlist via alternative audio output: headphones, bluetooth devices or AirPlay
 - View/scroll bursts in playlists
 - Includes support for Dark Mode
+
+<p align="middle">
+<img src="screenshots/1.png?raw=true"  width="200" hspace="5" title="Floating player"/><img src="screenshots/2.png?raw=true"  width="200" hspace="5" /><img src="screenshots/3.png?raw=true"  width="200" hspace="5" /><img src="screenshots/4.png?raw=true"  width="200" />
+</p>
 
 ## Requirements
 - Android 5.1+
@@ -46,6 +50,8 @@ implementation 'com.audioburst:audioburst_player:{latest-version}'
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
 ```
+
+If you decide in Audioburst Studio, that you want to use `FloatingPlayer` then you don't need this step. Player will appear on the screen right after `Experience` object is loaded.
 
 ### Step 3. Init AudioburstPlayer
 Initialize AudioburstPlayer in your `Application.onCreate` method:
@@ -110,3 +116,9 @@ AudioburstPlayer.removeErrorListener(this)
 - ExoPlayer
 - Groupie
 - Glide
+
+## Privacy Policy
+[Privacy Policy](https://audioburst.com/privacy)
+
+## Terms of Service
+[Terms of Service](https://audioburst.com/audioburst-publisher-terms)
