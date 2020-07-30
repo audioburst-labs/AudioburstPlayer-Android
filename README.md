@@ -42,6 +42,20 @@ Add AudioburstPlayer Android SDK to your project. To do this, add the following 
 implementation 'com.audioburst:audioburst_player:{latest-version}'
 ```
 
+Library is built in Kotlin language and is using `Coroutines`, so to be able to support it you need to add following configurations to your `android` script in app level `build.config` file:
+```gradle
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+}
+```
+
 ### Step 2. Add `MiniPlayer` to your layout hierarchy
 ```xml
 <fragment
@@ -52,6 +66,12 @@ implementation 'com.audioburst:audioburst_player:{latest-version}'
 ```
 
 If you decide in Audioburst Studio, that you want to use `FloatingPlayer` then you don't need this step. Player will appear on the screen right after `Experience` object is loaded.
+
+You can also open `Full Player` on demand with the following function:
+```kotlin
+AudioburstPlayer.showFullPlayer(this)
+```
+Please remember to first initialize the library as it is described in next step.
 
 ### Step 3. Init AudioburstPlayer
 Initialize AudioburstPlayer in your `Application.onCreate` method:

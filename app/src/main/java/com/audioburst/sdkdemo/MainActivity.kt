@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer
                 )
             )
         }
+
+        mainWelcomeTextView.setOnClickListener {
+            AudioburstPlayer.showFullPlayer(this)
+        }
     }
 
     override fun onResume() {
