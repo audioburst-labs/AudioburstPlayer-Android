@@ -42,6 +42,13 @@ Add AudioburstPlayer Android SDK to your project. To do this, add the following 
 implementation 'com.audioburst:audioburst_player:{latest-version}'
 ```
 
+In case your are getting a "Duplicate class" on Kotlin Coroutines dependencies, you need to exclude those from AudioburstPlayer library in a following way:
+```gradle
+implementation ("com.audioburst:audioburst_player:{latest-version}") {
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-core-jvm"
+    }
+```
+
 Library is built in Kotlin language and is using `Coroutines`, so to be able to support it you need to add following configurations to your `android` script in app level `build.config` file:
 ```gradle
 android {
