@@ -30,7 +30,7 @@ This guide is a quick walkthrough to add AudioburstPlayer to an Android app. We 
 ## Prerequisites
 
 ### Audioburst API key
-The application requires an application key and experience ID, both of which can be obtained via [Audioburst Publishers](https://studio.audioburst.com/). The experience ID is a unique identifier for the customized playlist topics chosen during the setup process in Audioburst Publishers.
+The application requires an application key and experience ID, both of which can be obtained via [Audioburst Publishers](https://publishers.audioburst.com/). The experience ID is a unique identifier for the customized playlist topics chosen during the setup process in Audioburst Publishers.
 
 ## Add AudioburstPlayer to your app
 
