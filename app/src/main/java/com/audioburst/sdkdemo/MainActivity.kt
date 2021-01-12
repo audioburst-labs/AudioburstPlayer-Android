@@ -1,10 +1,9 @@
 package com.audioburst.sdkdemo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.audioburst.audioburst_player.AudioburstPlayer
-import com.audioburst.audioburst_player.SdkKeys
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer.ErrorListener {
@@ -16,11 +15,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer
 
         mainReloadButton.setOnClickListener {
             AudioburstPlayer.init(
-                context = this,
-                sdkKeys = SdkKeys(
-                    applicationKey = mainApplicationKeyEditText.text.toString(),
-                    experienceId = mainExperienceIdEditView.text.toString()
-                )
+                applicationKey = mainApplicationKeyEditText.text.toString(),
+                experienceId = mainExperienceIdEditView.text.toString()
             )
         }
 
@@ -40,6 +36,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer
     }
 
     override fun onError(error: AudioburstPlayer.Error) {
-        Log.i("MainActivity", error.name())
+        Log.i("MainActivity", error.name)
     }
 }
