@@ -30,7 +30,7 @@ This guide is a quick walkthrough to add AudioburstPlayer to an Android app. We 
 ## Prerequisites
 
 ### Audioburst API key
-The application requires an application key and experience ID, both of which can be obtained via [Audioburst Publishers](https://publishers.audioburst.com/). The experience ID is a unique identifier for the customized playlist topics chosen during the setup process in Audioburst Publishers.
+The library requires an application key which can be obtained via [Audioburst Publishers](https://publishers.audioburst.com/). An experience ID is also available. This is a unique identifier for the customized playlist topics chosen during the setup process.
 
 ## Add AudioburstPlayer to your app
 
@@ -42,14 +42,14 @@ Add AudioburstPlayer Android SDK to your project. To do this, add the following 
 implementation 'com.audioburst:audioburst_player:{latest-version}'
 ```
 
-In case your are getting a "Duplicate class" on Kotlin Coroutines dependencies, you need to exclude those from AudioburstPlayer library in a following way:
+In case you're getting a "Duplicate class" on Kotlin Coroutines dependencies, you need to exclude those from AudioburstPlayer library in the following way:
 ```gradle
 implementation ("com.audioburst:audioburst_player:{latest-version}") {
-        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-core-jvm"
-    }
+    exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-core-jvm"
+}
 ```
 
-Library is built in Kotlin language and is using `Coroutines`, so to be able to support it you need to add following configurations to your `android` script in app level `build.config` file:
+The library is built using the Kotlin language and is using `Coroutines`, so to be able to support it you need to add the following configurations to your `android` script in the app level `build.config` file:
 ```gradle
 android {
     compileOptions {
@@ -63,7 +63,42 @@ android {
 }
 ```
 
-### Step 2. Add `MiniPlayer` to your layout hierarchy
+### Step 2. Init AudioburstPlayer
+AudioburstPlayer requires an application key to work. The player can be configured in two ways: via [Audioburst Publishers](https://publishers.audioburst.com/) after obtaining an experience ID or by passing a custom configuration.
+
+#### Initialize AudioburstPlayer with application key and experience ID:
+```kotlin
+AudioburstPlayer.init(
+    applicationKey = "YOUR_APP_KEY",
+    experienceId = "YOUR_EXPERIENCE_ID"
+)
+```
+
+#### Initialize AudioburstPlayer with application key and custom configuration:
+```kotlin
+AudioburstPlayer.init(
+    configuration = AudioburstPlayer.Configuration(
+        applicationKey = "YOUR_APP_KEY",
+        action = ...,
+        actionValue = ...,
+        mode = ...,
+        theme = ...,
+        accentColor = ...,
+        autoPlay = ...,
+    ),
+)
+```
+
+Parameters description:
+- applicationKey - String - application key obtained from [Audioburst Publishers](https://publishers.audioburst.com/),
+- action - Action enum - one of the types of playlists currently supported by the library,
+- actionValue - String - id of playlist that you would like to play,
+- mode - Mode enum - mode in which you would like player to appear (Button or Banner),
+- theme - Theme enum - theme of the players (Dark or Light),
+- accentColor - String - color of accents in players. It needs to be a hex value that starts with `#` character,
+- autoPlay - Boolean - whether player should start playing automatically after initialization or not.
+
+### Step 3. Add `MiniPlayer` to your layout hierarchy
 ```xml
 <fragment
     android:id="@+id/miniPlayer"
@@ -72,44 +107,19 @@ android {
     android:layout_height="wrap_content" />
 ```
 
-If you decide in Audioburst Studio, that you want to use `FloatingPlayer` then you don't need this step. Player will appear on the screen right after `Experience` object is loaded.
+If you choose in Audioburst Studio, to use the `Button Player` then this step is not required. The player will appear on the screen immediately after the `Experience` object is loaded.
 
 You can also open `Full Player` on demand with the following function:
 ```kotlin
-AudioburstPlayer.showFullPlayer(this)
-```
-Please remember to first initialize the library as it is described in next step.
-
-### Step 3. Init AudioburstPlayer
-Initialize AudioburstPlayer in your `Application.onCreate` method:
-```kotlin
-override fun onCreate() {
-    super.onCreate()
-    AudioburstPlayer.init(
-        context = this,
-        sdkKeys = SdkKeys(
-            applicationKey = "YOUR_APP_KEY",
-            experienceId = "YOUR_EXPERIENCE_ID"
-        )
-    )
-} 
+AudioburstPlayer.showFullPlayer(activity)
 ```
 
-### Step 4. Start playing Audioburst content:
-You simply need to call one method to start playing Audioburst content:
+### Step 4. Play content on demand
+You can request AudioburstPlayer to start playback at any time you want with simple `play()` method:
 ```kotlin
-AudioburstPlayer.startPlaying()
+AudioburstPlayer.play()
 ```
-
-in case you would like to change keys you used to initialize a SDK, you can also call:
-```kotlin
-AudioburstPlayer.setKeys(
-    sdkKeys = SdkKeys(
-        applicationKey = "YOUR_APP_KEY",
-        experienceId = "YOUR_EXPERIENCE_ID"
-    )
-)
-```
+In case AudioburstPlayer is not initialized yet this method call will cause library to remember this request and playback will start automatically after initialization process is finished.
 
 ### Step 5. Handle errors
 In the event of an error when communicating with the API, we provide a way to monitor those events:
