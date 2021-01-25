@@ -92,11 +92,20 @@ AudioburstPlayer.init(
 Parameters description:
 - applicationKey - String - application key obtained from [Audioburst Publishers](https://publishers.audioburst.com/),
 - action - Action enum - one of the types of playlists currently supported by the library,
-- actionValue - String - id of playlist that you would like to play,
 - mode - Mode enum - mode in which you would like player to appear (Button or Banner),
 - theme - Theme enum - theme of the players (Dark or Light),
 - accentColor - String - color of accents in players. It needs to be a hex value that starts with `#` character,
 - autoPlay - Boolean - whether player should start playing automatically after initialization or not.
+
+Possible `action` values:
+- AudioburstPlaylist(id: String)
+- UserGeneratedPlaylist(id: String)
+- PersonalPlaylist(id: String)
+- SourcePlaylist(id: String)
+- AccountPlaylist(id: String)
+- Voice(byteArray: ByteArray)
+
+Most of the options above accepts String `id` as a parameter. `Voice` playlist is a special type that accepts byte array from PCM file that should contain a voice saying what user would like to listen about.
 
 ### Step 3. Add `MiniPlayer` to your layout hierarchy
 ```xml
@@ -121,7 +130,15 @@ AudioburstPlayer.play()
 ```
 In case AudioburstPlayer is not initialized yet this method call will cause library to remember this request and playback will start automatically after initialization process is finished.
 
-### Step 5. Handle errors
+### Step 5. Pass recorded PCM file
+AudioburstPlayer is able to process raw audio files with recorded request what should be played. You can record your voice saying what would you like to listen to, upload it on your device and use AudioburstPlayer to play it.
+```kotlin
+AudioburstPlayer.loadPlaylist(byteArray)
+```
+`loadPlaylist` function accepts `Byte Array` as an argument. Request included in the PCM file will be processed and player will load a playlist included found Bursts (in case there are any). If we are unable to find any Bursts, you can expect `ErrorListener` to be called.
+Please remember that before playing any PCM file you need to initialize SDK.
+
+### Step 6. Handle errors
 In the event of an error when communicating with the API, we provide a way to monitor those events:
 ```kotlin
 class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer.ErrorListener {
