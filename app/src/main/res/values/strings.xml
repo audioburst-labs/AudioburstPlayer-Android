@@ -6,5 +6,43 @@
     <string name="main_settings_id">Experience ID</string>
     <string name="main_optional">(optional)</string>
     <string name="main_reload_player">Reload player</string>
-    <string name="main_no_key_error">Application key needs to be provided</string>
+    <string name="main_playlist_audioburst">Audioburst Playlist (channel)</string>
+    <string name="main_playlist_user_generated">User Generated Playlist (ug_playlist)</string>
+    <string name="main_playlist_personal">Personal Playlist (p_playlist)</string>
+    <string name="main_playlist_source">Source Playlist (s_playlist)</string>
+    <string name="main_playlist_account">Account Playlist (a_playlist)</string>
+    <string name="main_playlist_voice">Voice (Voice)</string>
+    <string name="main_tab_credentials">Credentials</string>
+    <string name="main_tab_custom_parmas">Custom Params</string>
+    <string name="main_no_recording_error">To be able to use %s option you need to record some query before</string>
+    <string name="main_recording_error">Error happened during recording. Please try again</string>
+
+    <string name="keys_application_key">Application key</string>
+    <string name="keys_experience_id">Experience ID</string>
+    <string name="keys_reload_player">Reload player</string>
+
+    <string name="custom_params_title_action">Action</string>
+    <string name="custom_params_hint_player_action_value">Player Action Value</string>
+    <string name="custom_params_title_player_mode">Player Mode</string>
+    <string name="custom_params_button_banner">Banner</string>
+    <string name="custom_params_button_button">Button</string>
+    <string name="custom_params_title_player_theme">Player Theme</string>
+    <string name="custom_params_button_dark">Dark</string>
+    <string name="custom_params_button_light">Light</string>
+    <string name="custom_params_title_color_accent">Color Accent</string>
+    <string name="custom_params_hint_hex_value">Hex value</string>
+    <string name="custom_params_title_auto_play">Auto play</string>
+    <string name="custom_params_app_key_error">Please provide ApplicationKey</string>
+    <string name="custom_params_player_action_value_error">Please provide Player Action Value</string>
+    <string name="custom_params_record_query">Record query</string>
+
+    <string name="error_network">You have no Internet connection.</string>
+    <string name="error_server">Something went wrong on server side.</string>
+    <string name="error_server_simple">Something went wrong on server side.</string>
+    <string name="error_unexpected">Something unexpected happened.</string>
+    <string name="error_wrong_app_key">Wrong Application Key.</string>
+    <string name="error_wrong_experience_id">Wrong Experience ID.</string>
+    <string name="error_no_bursts">No bursts were found.</string>
+    <string name="main_stop_recording">Stop recording</string>
+    <string name="main_recording_overlay_text">Recording …</string>
 </resources>

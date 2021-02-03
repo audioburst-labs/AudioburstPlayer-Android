@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.audioburst.sdkdemo">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
-        android:name=".AudioburstPlayerDemo"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
