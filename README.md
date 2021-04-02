@@ -115,21 +115,29 @@ Most of the options above accepts String `id` as a parameter. `Voice` playlist i
     android:layout_height="wrap_content" />
 ```
 
-If you choose in Audioburst Publishers, to use the `Button Player` then this step is not required. The player will appear on the screen immediately after the `Experience` object is loaded.
+If you choose in Audioburst Publishers or in the `Configuration` object, to use the `Button Player` then this step is not required.
+
+### Step 4. Show chosen Player
+AudioburstPlayer can inform you when the initialization process finishes and if it was successful. To do it, you need to pass `AudioburstPlayer.InitFinishListener` instance to the `init` method and get notified about it.
+When the initialization process is successfully finished, you can show chosen Player on the user screen:
+```kotlin
+AudioburstPlayer.showPlayer()
+```
+This method will return true if it was possible to show the player. If returned value is equal to false, it means that AudioburstPlayer hasn't been initialized properly yet.
 
 You can also open `Full Player` on demand with the following function:
 ```kotlin
 AudioburstPlayer.showFullPlayer(activity)
 ```
 
-### Step 4. Play content on demand
+### Step 5. Play content on demand
 Request the AudioburstPlayer to start playback at any time using this simple play() method:
 ```kotlin
 AudioburstPlayer.play()
 ```
 If AudioburstPlayer is not yet initialized this method call will cause the library to remember the request and playback will automatically start after the initialization process is completed.
 
-### Step 5. Pass recorded PCM file
+### Step 6. Pass recorded PCM file
 AudioburstPlayer is able to process raw audio files that contain a recorded request of what should be played. You can record a voice command stating what you would like to listen to and then upload it to your device and use AudioburstPlayer to play it.
 ```kotlin
 AudioburstPlayer.loadPlaylist(byteArray)
@@ -137,7 +145,7 @@ AudioburstPlayer.loadPlaylist(byteArray)
 The `loadPlaylist` function accepts `Byte Array` as an argument. A request included in the PCM file will be processed and the player will load a playlist of the bursts found. If no bursts are found, `ErrorListener` will be called.
 Please remember that before playing any PCM file the SDK must be initialized.
 
-### Step 6. Handle errors
+### Step 7. Handle errors
 In the event of an error when communicating with the API, we provide a way to monitor those events:
 ```kotlin
 class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer.ErrorListener {

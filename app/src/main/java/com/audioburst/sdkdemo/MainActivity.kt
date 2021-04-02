@@ -69,12 +69,19 @@ class MainActivity : AppCompatActivity() {
                 AudioburstPlayer.init(
                     applicationKey = applicationKey,
                     experienceId = experienceId,
+                    initFinishListener = onInitFinishListener,
                 )
             }
             is Event.ConfigurationInitialization -> {
-                AudioburstPlayer.init(configuration)
+                AudioburstPlayer.init(configuration, onInitFinishListener)
             }
         }.exhaustive
+    }
+
+    private val onInitFinishListener = AudioburstPlayer.InitFinishListener { isSuccess ->
+        if (isSuccess) {
+            AudioburstPlayer.showPlayer()
+        }
     }
 
     private val tabSelectedListener = object : TabLayout.OnTabSelectedListener {
