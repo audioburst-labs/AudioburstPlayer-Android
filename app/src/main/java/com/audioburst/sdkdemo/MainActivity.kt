@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
             .onEach { pagerAdapter.render(it) }
             .launchIn(lifecycleScope)
 
+        viewModel.playlistConfiguration
+            .onEach { pagerAdapter.render(it) }
+            .launchIn(lifecycleScope)
+
         viewModel.currentTab
             .onEach { viewPager.setCurrentItem(it, true) }
             .launchIn(lifecycleScope)
@@ -55,12 +59,14 @@ class MainActivity : AppCompatActivity() {
             .launchIn(lifecycleScope)
 
         viewPager.adapter = pagerAdapter
+        viewPager.offscreenPageLimit = 3
 
         stopRecordingButton.setOnClickListener { viewModel.stopRecording() }
 
         mainWelcomeTextView.setOnClickListener { AudioburstPlayer.showFullPlayer(this@MainActivity) }
     }
 
+    @Suppress("IMPLICIT_CAST_TO_ANY")
     private fun Event.handle() {
         when (this) {
             Event.PermissionRequest -> checkAudioPermission()
@@ -72,9 +78,9 @@ class MainActivity : AppCompatActivity() {
                     initFinishListener = onInitFinishListener,
                 )
             }
-            is Event.ConfigurationInitialization -> {
-                AudioburstPlayer.init(configuration, onInitFinishListener)
-            }
+            is Event.ConfigurationInitialization -> AudioburstPlayer.init(configuration, onInitFinishListener)
+            is Event.ShowPlaylistView -> AudioburstPlayer.showPlaylistView(this@MainActivity, configuration)
+            Event.LoadPlaylist -> AudioburstPlayer.showPlayer()
         }.exhaustive
     }
 

@@ -12,6 +12,7 @@ import com.audioburst.sdkdemo.custom_views.CustomParamsView.Mode.Banner
 import com.audioburst.sdkdemo.custom_views.CustomParamsView.Mode.Button
 import com.audioburst.sdkdemo.custom_views.CustomParamsView.Theme.Dark
 import com.audioburst.sdkdemo.custom_views.CustomParamsView.Theme.Light
+import com.audioburst.sdkdemo.custom_views.PlaylistConfigurationView
 import com.audioburst.sdkdemo.custom_views.SdkKeysView
 import com.audioburst.sdkdemo.custom_views.TabView
 import com.audioburst.sdkdemo.data.CredentialPreferences
@@ -30,9 +31,12 @@ class MainViewModel(
     private var currentRecording: ByteArray? = null
 
     private val _tabView = MutableStateFlow(
-        TabView.Configuration(listOf(stringProvider.getString(R.string.main_tab_credentials), stringProvider.getString(R.string.main_tab_custom_parmas)))
+        TabView.Configuration(listOf(stringProvider.getString(R.string.main_tab_credentials), stringProvider.getString(R.string.main_tab_custom_parmas), stringProvider.getString(R.string.main_tab_playlist_configuration)))
     )
     val tabView = _tabView.asStateFlow()
+
+    private val _playlistConfiguration = MutableStateFlow(PlaylistConfigurationView.Configuration(onEvent = ::onEvent))
+    val playlistConfiguration = _playlistConfiguration.asStateFlow()
 
     private val _sdkKeysView = MutableStateFlow(SdkKeysView.Configuration(onReloadButtonClicked = ::onReloadButton))
     val sdkKeysView = _sdkKeysView.asStateFlow()
@@ -136,7 +140,7 @@ class MainViewModel(
                 Dark -> Theme.Dark
                 null -> defaultValues.theme
             },
-            accentColor = if (colorAccent.isEmpty()) defaultValues.accentColor else colorAccent,
+            accentColor = colorAccent,
             autoPlay = configuration.autoPlay ?: defaultValues.autoPlay,
         )
         credentialPreferences.customParams = CustomParams(
@@ -222,6 +226,38 @@ class MainViewModel(
                 AudioburstPlayer.Error.NoBursts -> R.string.error_no_bursts
             }
         )
+
+    private fun onEvent(event: PlaylistConfigurationView.Event) {
+        _playlistConfiguration.value = when (event) {
+            is PlaylistConfigurationView.Event.ShowToolbarClicked -> _playlistConfiguration.value.copy(showToolbar = !_playlistConfiguration.value.showToolbar)
+            is PlaylistConfigurationView.Event.OnTextChanged.OptOutSectionIds -> _playlistConfiguration.value.copy(optOutSectionIdsText = _playlistConfiguration.value.optOutSectionIdsText.copy(text = event.value, updateText = false))
+            is PlaylistConfigurationView.Event.OnTextChanged.ToolbarTitle -> _playlistConfiguration.value.copy(toolbarTitleText = _playlistConfiguration.value.toolbarTitleText.copy(text = event.value, updateText = false))
+            is PlaylistConfigurationView.Event.ShowPlaylistView -> handleShowPlaylistView()
+            is PlaylistConfigurationView.Event.SectionTypeRadioButtonClicked -> _playlistConfiguration.value.copy(sectionType = when (_playlistConfiguration.value.sectionType) {
+                PlaylistConfigurationView.SectionType.Horizontal -> PlaylistConfigurationView.SectionType.Grid
+                PlaylistConfigurationView.SectionType.Grid -> PlaylistConfigurationView.SectionType.Horizontal
+            })
+            is PlaylistConfigurationView.Event.ShowMyPlaylistsClicked -> _playlistConfiguration.value.copy(showMyPlaylist = !_playlistConfiguration.value.showMyPlaylist)
+            is PlaylistConfigurationView.Event.CloseOnPlaylistLoadClicked -> _playlistConfiguration.value.copy(closeOnPlaylistLoad = !_playlistConfiguration.value.closeOnPlaylistLoad)
+        }
+    }
+
+    private fun handleShowPlaylistView(): PlaylistConfigurationView.Configuration {
+        val configuration = AudioburstPlayer.PlaylistViewConfiguration(
+            showToolbar = _playlistConfiguration.value.showToolbar,
+            toolbarTitle = _playlistConfiguration.value.toolbarTitleText.text,
+            sectionType = when (_playlistConfiguration.value.sectionType) {
+                PlaylistConfigurationView.SectionType.Horizontal -> AudioburstPlayer.PlaylistViewConfiguration.SectionType.Horizontal
+                PlaylistConfigurationView.SectionType.Grid -> AudioburstPlayer.PlaylistViewConfiguration.SectionType.Grid
+            },
+            showMyPlaylists = _playlistConfiguration.value.showMyPlaylist,
+            closeOnPlaylistLoad = _playlistConfiguration.value.closeOnPlaylistLoad,
+        )
+        viewModelScope.launch {
+            _events.emit(Event.ShowPlaylistView(configuration))
+        }
+        return _playlistConfiguration.value
+    }
 
     class Factory(
         private val stringProvider: StringProvider,

@@ -13,4 +13,8 @@ sealed class Event {
     ) : Event()
 
     data class ConfigurationInitialization(val configuration: AudioburstPlayer.Configuration) : Event()
+
+    data class ShowPlaylistView(val configuration: AudioburstPlayer.PlaylistViewConfiguration) : Event()
+
+    object LoadPlaylist : Event()
 }

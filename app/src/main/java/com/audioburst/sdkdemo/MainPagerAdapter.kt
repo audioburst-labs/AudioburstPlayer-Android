@@ -5,15 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.audioburst.sdkdemo.custom_views.CustomParamsView
+import com.audioburst.sdkdemo.custom_views.PlaylistConfigurationView
 import com.audioburst.sdkdemo.custom_views.SdkKeysView
 
 class MainPagerAdapter(context: Context) : PagerAdapter() {
 
     private val sdkKeysView: SdkKeysView = SdkKeysView(context)
     private val customParamsView: CustomParamsView = CustomParamsView(context)
+    private val playlistConfigurationView = PlaylistConfigurationView(context)
 
     private val views by lazy {
-        listOf(sdkKeysView, customParamsView)
+        listOf(sdkKeysView, customParamsView, playlistConfigurationView)
     }
 
     override fun isViewFromObject(view: View, `object`: Any) = view == `object`
@@ -33,5 +35,9 @@ class MainPagerAdapter(context: Context) : PagerAdapter() {
 
     fun render(configuration: CustomParamsView.Configuration) {
         customParamsView.render(configuration)
+    }
+
+    fun render(configuration: PlaylistConfigurationView.Configuration) {
+        playlistConfigurationView.render(configuration)
     }
 }

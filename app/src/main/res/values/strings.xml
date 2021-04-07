@@ -8,12 +8,12 @@
     <string name="main_reload_player">Reload player</string>
     <string name="main_playlist_audioburst">Audioburst Playlist (channel)</string>
     <string name="main_playlist_user_generated">User Generated Playlist (ug_playlist)</string>
-    <string name="main_playlist_personal">Personal Playlist (p_playlist)</string>
     <string name="main_playlist_source">Source Playlist (s_playlist)</string>
     <string name="main_playlist_account">Account Playlist (a_playlist)</string>
     <string name="main_playlist_voice">Voice (Voice)</string>
     <string name="main_tab_credentials">Credentials</string>
     <string name="main_tab_custom_parmas">Custom Params</string>
+    <string name="main_tab_playlist_configuration">Show Playlists</string>
     <string name="main_no_recording_error">To be able to use %s option you need to record some query before</string>
     <string name="main_recording_error">Error happened during recording. Please try again</string>
 
@@ -45,4 +45,14 @@
     <string name="error_no_bursts">No bursts were found.</string>
     <string name="main_stop_recording">Stop recording</string>
     <string name="main_recording_overlay_text">Recording …</string>
+    <string name="playlist_configuration_toolbar_title">Toolbar title</string>
+    <string name="playlist_configuration_provide_toolbar_title">Provide toolbar title</string>
+    <string name="playlist_configuration_show_toolbar">Show toolbar</string>
+    <string name="playlist_configuration_show_my_playlists">Show "My Playlists" section</string>
+    <string name="playlist_configuration_close_on_load">Close on Playlist load</string>
+    <string name="playlist_configuration_show_playlist_view">Show Playlist view</string>
+    <string name="playlist_configuration_title_section_type">Section type</string>
+    <string name="playlist_configuration_section_type_horizontal">Horizontal</string>
+    <string name="playlist_configuration_section_type_grid">Grid</string>
+    <string name="keys_show_player">Show player</string>
 </resources>
