@@ -106,6 +106,12 @@ Possible `action` values:
 
 Most of the options above accepts String `id` as a parameter. `Voice` playlist is a special type that accepts byte array from PCM file that should contain a voice saying what user would like to listen about.
 
+#### Decide about offline playback
+Before you initialize AudioburstPlayer you can decide whether SDK should prefetch Bursts to allow playback even when the user loses the Internet connection. By default the SDK will allow for this, but you can change this behavior using the following method:
+```kotlin
+AudioburstPlayer.allowOfflinePlayback = false
+```
+
 ### Step 3. Add `MiniPlayer` to your layout hierarchy
 ```xml
 <fragment
