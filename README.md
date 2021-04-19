@@ -35,7 +35,7 @@ The library requires an application key which can be obtained via [Audioburst Pu
 ## Add AudioburstPlayer to your app
 
 ### Step 1. Add AudioburstPlayer dependency
-[ ![Download Android](https://api.bintray.com/packages/audioburst/maven/audioburst_player/images/download.svg) ](https://bintray.com/audioburst/maven/audioburst_player/_latestVersion)
+[ ![Download Android](https://maven-badges.herokuapp.com/maven-central/com.audioburst/audioburst_player/badge.svg) ](https://search.maven.org/artifact/com.audioburst/audioburst_player)
 
 Add AudioburstPlayer Android SDK to your project. To do this, add the following dependency in your app level `build.gradle` file:
 ```gradle
