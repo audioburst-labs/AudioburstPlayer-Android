@@ -106,12 +106,6 @@ Possible `action` values:
 
 Most of the options above accepts String `id` as a parameter. `Voice` playlist is a special type that accepts byte array from PCM file that should contain a voice saying what user would like to listen about.
 
-#### Decide about offline playback
-Before you initialize AudioburstPlayer you can decide whether SDK should prefetch Bursts to allow playback even when the user loses the Internet connection. By default the SDK will allow for this, but you can change this behavior using the following method:
-```kotlin
-AudioburstPlayer.allowOfflinePlayback = false
-```
-
 ### Step 3. Add `MiniPlayer` to your layout hierarchy
 ```xml
 <fragment
@@ -136,12 +130,13 @@ You can also open `Full Player` on demand with the following function:
 AudioburstPlayer.showFullPlayer(activity)
 ```
 
-### Step 5. Play content on demand
-Request the AudioburstPlayer to start playback at any time using this simple play() method:
+### Step 5. Play/pause content on demand
+Request the AudioburstPlayer to start/stop playback at any time using these simple methods:
 ```kotlin
 AudioburstPlayer.play()
+AudioburstPlayer.pause()
 ```
-If AudioburstPlayer is not yet initialized this method call will cause the library to remember the request and playback will automatically start after the initialization process is completed.
+If AudioburstPlayer is not yet initialized `play()` method call will cause the library to remember the request and playback will automatically start after the initialization process is completed.
 
 ### Step 6. Pass recorded PCM file
 AudioburstPlayer is able to process raw audio files that contain a recorded request of what should be played. You can record a voice command stating what you would like to listen to and then upload it to your device and use AudioburstPlayer to play it.
@@ -151,7 +146,42 @@ AudioburstPlayer.loadPlaylist(byteArray)
 The `loadPlaylist` function accepts `Byte Array` as an argument. A request included in the PCM file will be processed and the player will load a playlist of the bursts found. If no bursts are found, `ErrorListener` will be called.
 Please remember that before playing any PCM file the SDK must be initialized.
 
-### Step 7. Handle errors
+### Step 7. Programatically control Floating (Button) player
+When you choose to use Floating (Button) Player you can better control its position and state with the set of the functions described below.
+
+#### `setPlayerPosition`
+This function accepts x and y coordinates. It will let you move Floating player around and place it wherever you want. If you call this function before Floating player is shown you will make library remember the position and it will show it at requested position as soon as player is initialized.
+```kotlin
+AudioburstPlayer.setPlayerPosition(0, 0)
+```
+
+#### `setPlayerState`
+Floating player can be displayed in one of the following states:
+- `Floating` - the default state. When it is being shown as a small circle.
+- `Expanded` - the state where additional information and playback control buttons are displayed.
+- `Sticky` - minimized player that is attached to one of the side edges.
+It is possible to transit between following states:
+- From `Floating` to `Expanded` - it will animate a player expand.
+- From `Expanded` to `Floating` - it will animate a player collapse.
+- From `Floating` to `Sticky` - it will find the closest edge and attach to it.
+- From `Sticky` to `Floating` - it will detach from to edge.
+
+You can control the appearance by using this function:
+```kotlin
+AudioburstPlayer.setPlayerState(Floating)
+```
+
+If you call this function before Floating player is shown you will make library remember the requested state and it will show in it as soon as player is initialized.
+
+#### `getPlayerStatus`
+This function will let you know what is the `PlayerStatus`:
+positionX - Int - current X coordinate of the Floating player.
+positionY - Int - current Y coordinate of the Floating player.
+playerState - PlayerState - current state of the Floating player.
+lastActivationDate - LocalDateTime? - last time when Floating player has been used by the user. It can be null if there was no action performed on the Floting player yet.
+This function can return null when Floating player is not shown yet.
+
+### Step 8. Handle errors
 In the event of an error when communicating with the API, we provide a way to monitor those events:
 ```kotlin
 class MainActivity : AppCompatActivity(R.layout.activity_main), AudioburstPlayer.ErrorListener {
@@ -168,6 +198,20 @@ Don’t forget to unregister `ErrorListener` to avoid memory leaks:
 ```kotlin
 AudioburstPlayer.removeErrorListener(this)
 ```
+
+## Additional configuration
+### Disable/enable offline playback
+Before you initialize AudioburstPlayer you can decide whether SDK should prefetch Bursts to allow playback even when the user loses the Internet connection. By default the SDK will allow for this, but you can change this behavior using the following method:
+```kotlin
+AudioburstPlayer.allowOfflinePlayback = false
+```
+
+### Disable/enable playback notification
+You can decide whether library should display playback notification. `true` means that playback will happen in Foreground Service.
+```kotlin
+AudioburstPlayer.allowDisplayPlaybackNotification = false
+```
+This value is set to `true` by default.
 
 ## Dependencies
 - Kotlin
