@@ -200,6 +200,13 @@ AudioburstPlayer.removeErrorListener(this)
 ```
 
 ## Additional configuration
+
+## Filter out listened Bursts
+By default, SDK will filter-out all Bursts that user already listened to. Use `filterListenedBursts` function to change this behaviour.
+```kotlin
+AudioburstPlayer.filterListenedBursts(isEnabled)
+```
+
 ### Disable/enable offline playback
 Before you initialize AudioburstPlayer you can decide whether SDK should prefetch Bursts to allow playback even when the user loses the Internet connection. By default the SDK will allow for this, but you can change this behavior using the following method:
 ```kotlin
