@@ -199,6 +199,18 @@ Don’t forget to unregister `ErrorListener` to avoid memory leaks:
 AudioburstPlayer.removeErrorListener(this)
 ```
 
+## Show Playlist view
+Using AudioburstPlayer you can also give your user a possibility to choose what playlist one would like to listen to. To do that use following method:
+```kotlin
+AudioburstPlayer.showPlaylistView(activity, configuration)
+```
+`PlaylistViewConfiguration` object gives you a possibility to customize `PlaylistView` in a following way:
+- showToolbar - Boolean - whether to show Toolbar or not.
+- toolbarTitle - String - text that should be displayed as a Toolbar title.
+- showMyPlaylists - String - "My Playlists" section is a special section playlist types.
+- sectionType - SectionType enum - you can choose whether playlist tiles should be displayed as a grid or vertical carousel.
+- closeOnPlaylistLoad - Boolean - flag that controls if "PlaylistView" should be dismissed after any playlist has been chosen.
+
 ## Additional configuration
 
 ## Filter out listened Bursts
