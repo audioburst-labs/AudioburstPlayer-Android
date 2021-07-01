@@ -207,8 +207,17 @@ AudioburstPlayer.showPlaylistView(activity, configuration)
 `PlaylistViewConfiguration` object gives you a possibility to customize `PlaylistView` in a following way:
 - showToolbar - Boolean - whether to show Toolbar or not.
 - toolbarTitle - String - text that should be displayed as a Toolbar title.
+<p align="middle">
+<img src="screenshots/playlist_view_title.png?raw=true"  width="200" title="showToolbar=true, toolbarTitle=toolbarTitle"/>
+</p>
 - showMyPlaylists - String - "My Playlists" section is a special section playlist types.
-- sectionType - SectionType enum - you can choose whether playlist tiles should be displayed as a grid or vertical carousel.
+<p align="middle">
+<img src="screenshots/playlist_view_my_playlists.png?raw=true"  width="200" />
+</p>
+- sectionType - SectionType enum - you can choose whether playlist tiles should be displayed as a grid or horizontal carousel.
+<p align="middle">
+<img src="screenshots/playlist_view_grid.png?raw=true"  width="200" hspace="5" title="Grid"/><img src="screenshots/playlist_view_horizontal.png?raw=true"  width="200" hspace="5" title="Horizontal"/>
+</p>
 - closeOnPlaylistLoad - Boolean - flag that controls if "PlaylistView" should be dismissed after any playlist has been chosen.
 
 ## Additional configuration
