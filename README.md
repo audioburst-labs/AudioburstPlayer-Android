@@ -99,7 +99,6 @@ Parameters description:
 Possible `action` values:
 - AudioburstPlaylist(id: String)
 - UserGeneratedPlaylist(id: String)
-- PersonalPlaylist(id: String)
 - SourcePlaylist(id: String)
 - AccountPlaylist(id: String)
 - Voice(byteArray: ByteArray)
