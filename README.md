@@ -88,7 +88,7 @@ AudioburstPlayer.init(
 )
 ```
 
-Parameters description:
+##### Parameters description:
 - applicationKey - String - application key obtained from [Audioburst Publishers](https://publishers.audioburst.com/),
 - action - Action enum - one of the types of playlists currently supported by the library,
 - mode - Mode enum - mode in which you would like player to appear (Button or Banner),
@@ -96,7 +96,7 @@ Parameters description:
 - accentColor - String - color of accents in players. It needs to be a hex value that starts with `#` character,
 - autoPlay - Boolean - whether player should start playing automatically after initialization or not.
 
-Possible `action` values:
+##### Possible `action` values:
 - AudioburstPlaylist(id: String)
 - UserGeneratedPlaylist(id: String)
 - SourcePlaylist(id: String)
@@ -218,6 +218,24 @@ AudioburstPlayer.showPlaylistView(activity, configuration)
 <img src="screenshots/playlist_view_grid.png?raw=true"  width="200" hspace="5" title="Grid"/><img src="screenshots/playlist_view_horizontal.png?raw=true"  width="200" hspace="5" title="Horizontal"/>
 </p>
 - closeOnPlaylistLoad - Boolean - flag that controls if "PlaylistView" should be dismissed after any playlist has been chosen.
+
+## Get Playlist information
+Using AudioburstPlayer you can also request a particular playlist's information and render it for the user in your app. Pass information about what playlist you would like to get to `getPlaylist` function and wait for the result.
+```kotlin
+val action = AudioburstPlayer.Configuration.Action.AudioburstPlaylist("1")
+AudioburstPlayer.getPlaylist(action) { playlist ->
+    // Render ui
+}
+```
+You can check all possible `Playlist`'s actions [here](https://github.com/audioburst-labs/AudioburstPlayer-Android#possible-action-values).
+
+## Play Playlist
+Each `Playlist` returned from `getPlaylist` function consist list of `Burst`s. You can let your user choose any of them and use its `id` to make this `Burst` appear on the beginning of the playlist
+```kotlin
+val action = AudioburstPlayer.Configuration.Action.AudioburstPlaylist("1")
+val burstId = burst.id
+AudioburstPlayer.playPlaylist(action, burstId)
+```
 
 ## Additional configuration
 
