@@ -117,7 +117,7 @@ class CustomParamsView @JvmOverloads constructor(
         val mode: Mode? = null,
         val theme: Theme? = null,
         val colorAccent: EditTextState = EditTextState(),
-        val autoPlay: Boolean? = null,
+        val autoPlay: Boolean = true,
         val onEvent: (Event) -> Unit,
     )
 

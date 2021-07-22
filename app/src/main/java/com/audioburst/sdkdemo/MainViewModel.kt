@@ -141,7 +141,7 @@ class MainViewModel(
                 null -> defaultValues.theme
             },
             accentColor = colorAccent,
-            autoPlay = configuration.autoPlay ?: defaultValues.autoPlay,
+            autoPlay = configuration.autoPlay,
         )
         credentialPreferences.customParams = CustomParams(
             applicationKey = applicationKey,
@@ -162,7 +162,7 @@ class MainViewModel(
             is ActionTypeChanged -> event.handle()
             is PlayerModeClicked -> _customParamsView.value.copy(mode = event.mode)
             is PlayerThemeClicked -> _customParamsView.value.copy(theme = event.theme)
-            is AutoPlayClicked -> _customParamsView.value.copy(autoPlay = _customParamsView.value.autoPlay?.let { !it } ?: !event.isSelected)
+            is AutoPlayClicked -> _customParamsView.value.copy(autoPlay = !_customParamsView.value.autoPlay)
             is ReloadButtonClicked -> event.handle()
             is RecordButtonClicked -> event.handle()
             is OnTextChanged.ApplicationKey -> _customParamsView.value.copy(applicationKey = _customParamsView.value.applicationKey.copy(text = event.value, updateText = false))
@@ -243,9 +243,10 @@ class MainViewModel(
     }
 
     private fun handleShowPlaylistView(): PlaylistConfigurationView.Configuration {
+        val default = AudioburstPlayer.PlaylistViewConfiguration()
         val configuration = AudioburstPlayer.PlaylistViewConfiguration(
             showToolbar = _playlistConfiguration.value.showToolbar,
-            toolbarTitle = _playlistConfiguration.value.toolbarTitleText.text,
+            toolbarTitle = _playlistConfiguration.value.toolbarTitleText.text ?: default.toolbarTitle,
             sectionType = when (_playlistConfiguration.value.sectionType) {
                 PlaylistConfigurationView.SectionType.Horizontal -> AudioburstPlayer.PlaylistViewConfiguration.SectionType.Horizontal
                 PlaylistConfigurationView.SectionType.Grid -> AudioburstPlayer.PlaylistViewConfiguration.SectionType.Grid

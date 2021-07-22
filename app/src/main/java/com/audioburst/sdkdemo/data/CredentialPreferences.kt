@@ -74,5 +74,5 @@ data class CustomParams(
     val mode: CustomParamsView.Mode?,
     val theme: CustomParamsView.Theme?,
     val colorAccent: String?,
-    val autoPlay: Boolean?,
+    val autoPlay: Boolean = true,
 )

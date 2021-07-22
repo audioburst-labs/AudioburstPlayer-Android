@@ -65,10 +65,10 @@ class PlaylistConfigurationView @JvmOverloads constructor(
 
     data class Configuration(
         val optOutSectionIdsText: EditTextState = EditTextState(),
-        val toolbarTitleText: EditTextState = EditTextState(),
-        val showToolbar: Boolean = false,
-        val showMyPlaylist: Boolean = false,
-        val closeOnPlaylistLoad: Boolean = false,
+        val toolbarTitleText: EditTextState = EditTextState(text = "Podcast Bits"),
+        val showToolbar: Boolean = true,
+        val showMyPlaylist: Boolean = true,
+        val closeOnPlaylistLoad: Boolean = true,
         val sectionType: SectionType = SectionType.Horizontal,
         val onEvent: (Event) -> Unit,
     )
