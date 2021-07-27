@@ -124,6 +124,11 @@ AudioburstPlayer.showPlayer()
 ```
 This method will return true if it was possible to show the player. If returned value is equal to false, it means that AudioburstPlayer hasn't been initialized properly yet.
 
+In case you need to hide Button/Banner player for some reason, you can use `hidePlayer` function:
+```kotlin
+AudioburstPlayer.hidePlayer()
+```
+
 You can also open `Full Player` on demand with the following function:
 ```kotlin
 AudioburstPlayer.showFullPlayer(activity)
