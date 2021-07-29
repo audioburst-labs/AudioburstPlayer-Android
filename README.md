@@ -134,6 +134,11 @@ You can also open `Full Player` on demand with the following function:
 AudioburstPlayer.showFullPlayer(activity)
 ```
 
+"Full Player" comes with the "keywords view" shown as default, however you can decide whether to show it or not with the following function:
+```kotlin
+AudioburstPlayer.showFullPlayerKeywords(isShown)
+```
+
 ### Step 5. Play/pause content on demand
 Request the AudioburstPlayer to start/stop playback at any time using these simple methods:
 ```kotlin
@@ -179,10 +184,10 @@ If you call this function before Floating player is shown you will make library 
 
 #### `getPlayerStatus`
 This function will let you know what is the `PlayerStatus`:
-positionX - Int - current X coordinate of the Floating player.
-positionY - Int - current Y coordinate of the Floating player.
-playerState - PlayerState - current state of the Floating player.
-lastActivationDate - LocalDateTime? - last time when Floating player has been used by the user. It can be null if there was no action performed on the Floting player yet.
+- positionX - Int - current X coordinate of the Floating player.
+- positionY - Int - current Y coordinate of the Floating player.
+- playerState - PlayerState - current state of the Floating player.
+- lastActivationDate - LocalDateTime? - last time when Floating player has been used by the user. It can be null if there was no action performed on the Floting player yet.
 This function can return null when Floating player is not shown yet.
 
 ### Step 8. Handle errors
